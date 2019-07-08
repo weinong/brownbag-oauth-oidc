@@ -21,6 +21,9 @@ docker stop httpbin
 docker run -d -p 8081:80 --rm --name httpbin kennethreitz/httpbin
 
 # open browser to below location
-echo "open browser to this location"
+echo "click enter to open browser to this location"
 echo "https://login.microsoftonline.com/${TENANT_ID}/oauth2/authorize?client_id=${CLIENT_ID}&response_type=${RESPONSE_TYPE}&redirect_uri=${RETURNED_URL}&response_mode=${RESPONSE_CODE}&state=${STATE}&scope=${SCOPE}&nonce=${NONCE}"
+read
+
+open -a "Google Chrome" "https://login.microsoftonline.com/${TENANT_ID}/oauth2/authorize?client_id=${CLIENT_ID}&response_type=${RESPONSE_TYPE}&redirect_uri=${RETURNED_URL}&response_mode=${RESPONSE_CODE}&state=${STATE}&scope=${SCOPE}&nonce=${NONCE}"
 
