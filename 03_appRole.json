@@ -1,0 +1,10 @@
+{
+  "allowedMemberTypes": [
+    "User"
+  ],
+  "description": "Admin can do anything",
+  "displayName": "Admin",
+  "id": "2d765b4c-768a-460c-b518-cdeee0c19221",
+  "isEnabled": true,
+  "value": "Admin"
+}
