@@ -4,6 +4,7 @@
 
 # 1. create AAD application with redirect URL: http://localhost/code
 # 2. create and capture client secret
+# 3. add api permission: Azure Active Directory Graph / User.Read
 
 TENANT_ID=''
 CLIENT_ID=''
@@ -22,17 +23,19 @@ echo "https://login.microsoftonline.com/${TENANT_ID}/oauth2/authorize?client_id=
 echo "Enter authorization code" 
 read AUTHORIZATION_CODE
 
+echo "exchange token"
 # after logged in and consented, it will be redirected to the returned url with authorization code
 # the code can be used to exchange access token:
 BODY=$(curl -sX POST \
-     -d resource=${RESOURCE} \
+     -d resource="${RESOURCE}" \
      -d grant_type=authorization_code \
-     -d client_id=${CLIENT_ID} \
-     -d code=${AUTHORIZATION_CODE} \
+     -d client_id="${CLIENT_ID}" \
+     -d code="${AUTHORIZATION_CODE}" \
      -d redirect_uri="${RETURNED_URL}" \
      -d client_secret="${CLIENT_SECRET}" \
      "https://login.microsoftonline.com/${TENANT_ID}/oauth2/token")
 
+echo "token response"
 echo ${BODY} | jq 'with_entries(.value = .value[0:100])'
 
 ACCESS_TOKEN=$(echo ${BODY} | jq -r ".access_token")
